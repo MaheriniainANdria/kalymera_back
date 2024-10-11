@@ -33,13 +33,25 @@ class TableController extends AbstractController
         if (empty($data['name'])) {
             return new JsonResponse(['message' => 'Name is required'], 400);
         }
-
+    
+        // Create new instance of DiningTable
         $table = new DiningTable();
         $table->setName($data['name']);
-        
+        $table->setTableNumber($data['tableNumber']); 
+    
+        // Use default value if not included in request
+        $numberOfSeats = isset($data['number_of_seats']) ? $data['number_of_seats'] : 0;
+        $type = isset($data['type']) ? $data['type'] : 'normal';
+        $location = isset($data['location']) ? $data['location'] : 'interieur';
+    
+        $table->setNumberOfSeats($numberOfSeats);
+        $table->setType($type);
+        $table->setLocation($location);
+    
+        // Save table on database
         $this->entityManager->persist($table);
         $this->entityManager->flush();
-
+    
         return new JsonResponse(['message' => 'Table created successfully', 'id' => $table->getId()], 201);
     }
-}
+ }  
