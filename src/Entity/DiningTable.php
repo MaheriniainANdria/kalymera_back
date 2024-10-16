@@ -2,29 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity]
 class DiningTable
-{
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private int $id;
-
-    #[ORM\Column(type: 'integer')]
+{   
+    private ?int $id = null;
     private int $tableNumber;
-
-    #[ORM\Column(type: 'string')]
     private string $name;
-
-    #[ORM\Column(type: 'integer')]
     private int $numberOfSeats;
-
-    #[ORM\Column(type: 'string', length: 255)]
     private string $type;
-
-    #[ORM\Column(type: 'string', length: 255)]
     private string $location;
 
     // Getters and setters
@@ -33,7 +17,7 @@ class DiningTable
         return $this->id;
     }
 
-    public function gettableNumber() : ?int 
+    public function getTableNumber(): ?int 
     {
         return $this->tableNumber;
     }
